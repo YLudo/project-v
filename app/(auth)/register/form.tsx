@@ -8,8 +8,15 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
+import { signUp } from "@/lib/actions/user.actions";
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
+    const [isLoading, setIsLoading] = useState(false);
+    const router = useRouter();
+
     const FormSchema = registerFormSchema();
     type FormData = z.infer<typeof FormSchema>;
 
@@ -22,8 +29,17 @@ const RegisterForm = () => {
         },
     });
 
-    const onSubmit = (data: FormData) => {
-        console.log(data);
+    const onSubmit = async (data: FormData) => {
+        setIsLoading(true);
+
+        try {
+            await signUp(data);
+            router.push("/");
+        } catch (error) {
+            console.error('Error when signin up:', error);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -68,7 +84,14 @@ const RegisterForm = () => {
                         </FormItem>
                     )}
                 />
-                <Button type="submit" className="w-full">S'inscrire</Button>
+                <Button type="submit" className="w-full">
+                    {isLoading ? (
+                        <>
+                            <Loader2 size={20} className="animate-spin" /> &nbsp;
+                            Chargement...
+                        </>
+                    ) : "S'inscrire"}
+                </Button>
                 <p className="text-sm text-center">Vous avez déjà un compte ? <Link href="/login" className="text-primary">Se connecter</Link></p>
             </form>
         </Form>

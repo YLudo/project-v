@@ -1,5 +1,6 @@
 import { LucideIcon } from "lucide-react";
 
+// MENU
 declare type Submenu = {
     href: string;
     label: string;
@@ -41,11 +42,41 @@ declare type MenuProps = {
     isOpen: boolean | undefined;
 }
 
+declare type UserNavProps = {
+    user: User;
+}
+
 declare type NavbarProps = {
     title: string;
+    user: User;
 }
 
 declare type ContentLayoutProps = {
     title: string;
+    user: User;
     children: React.ReactNode;
+}
+
+// AUTH
+declare type SignUpParams = {
+    username: string;
+    email: string;
+    password: string;
+}
+
+declare type SignInParams = {
+    email: string;
+    password: string;
+}
+
+// APP
+declare type GetUserInfoProps = {
+    userId: string;
+}
+
+declare type User = {
+    $id: string;
+    userId: string;
+    email: string;
+    username: string;
 }

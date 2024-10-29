@@ -1,8 +1,11 @@
 import { ContentLayout } from "@/components/layout/content-layout";
+import { getLoggedInUser } from "@/lib/actions/user.actions";
 
-const DashboardPage = () => {
+const DashboardPage = async () => {
+    const user = await getLoggedInUser();
+
     return (
-        <ContentLayout title="Tableau de bord">
+        <ContentLayout title="Tableau de bord" user={user}>
             Test
         </ContentLayout>
     );
