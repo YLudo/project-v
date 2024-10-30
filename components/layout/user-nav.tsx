@@ -12,8 +12,8 @@ import router from "next/router";
 
 const UserNav = ({ user }: UserNavProps) => {
     const handleLogOut = async () => {
-        const signedOut = await signOut();
-        if(signedOut) router.push('/login');
+        await signOut();
+        router.push('/login');
     }
 
     return (
