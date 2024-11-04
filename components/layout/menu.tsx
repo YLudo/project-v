@@ -2,7 +2,7 @@
 
 import getMenuList from "@/lib/menu-list";
 import { MenuProps } from "@/types";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -10,10 +10,27 @@ import { Ellipsis, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import CollapseMenuButton from "@/components/layout/collapse-menu-button";
+import { signOut } from "@/lib/actions/user.actions";
+import { toast } from "@/hooks/use-toast";
 
 const Menu = ({ isOpen}: MenuProps) => {
     const pathname = usePathname();
     const menuList = getMenuList(pathname);
+    const router = useRouter();
+
+    const handleLogOut = async () => {
+        const response = await signOut();
+
+        if ('error' in response) {
+            toast({
+                variant: "destructive",
+                title: "Déconnexion échouée !",
+                description: response.error
+            });
+        } else {
+            router.push("/login");
+        }
+    }
 
     return (
         <ScrollArea className="[&>div>div[style]]:!block">
@@ -98,7 +115,7 @@ const Menu = ({ isOpen}: MenuProps) => {
                             <Tooltip delayDuration={100}>
                                 <TooltipTrigger asChild>
                                     <Button
-                                        onClick={() => {}}
+                                        onClick={handleLogOut}
                                         variant="outline"
                                         className="w-full justify-center h-10 mt-5"
                                     >

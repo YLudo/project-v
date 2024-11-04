@@ -6,8 +6,28 @@ import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@/comp
 import { LayoutGrid, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { UserNavProps } from "@/types";
+import { signOut } from "@/lib/actions/user.actions";
+import { toast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
 
-const UserNav = () => {
+const UserNav = ({ user }: UserNavProps) => {
+    const router = useRouter();
+    
+    const handleLogOut = async () => {
+        const response = await signOut();
+
+        if ('error' in response) {
+            toast({
+                variant: "destructive",
+                title: "Déconnexion échouée !",
+                description: response.error
+            });
+        } else {
+            router.push("/login");
+        }
+    }
+
     return (
         <DropdownMenu>
             <TooltipProvider disableHoverableContent>
@@ -20,7 +40,7 @@ const UserNav = () => {
                             >
                                 <Avatar className="h-8 w-8">
                                     <AvatarImage src="#" alt="Avatar" />
-                                    <AvatarFallback className="bg-transparent">LR</AvatarFallback>
+                                    <AvatarFallback className="bg-transparent">{user.username[0]}</AvatarFallback>
                                 </Avatar>
                             </Button>
                         </DropdownMenuTrigger>
@@ -31,9 +51,9 @@ const UserNav = () => {
             <DropdownMenuContent className="w-56" align="end" forceMount>
                 <DropdownMenuLabel className="font-normal">
                     <div className="flex flex-col space-y-1">
-                        <p className="text-sm font-medium leading-none">Ludovic ROUX</p>
+                        <p className="text-sm font-medium leading-none">{user.username}</p>
                         <p className="text-xs leading-none text-muted-foreground">
-                            roux.ludovic.pro@gmail.com
+                            {user.email}
                         </p>
                     </div>
                 </DropdownMenuLabel>
@@ -47,7 +67,7 @@ const UserNav = () => {
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="hover:cursor-pointer" onClick={() => {}}>
+                <DropdownMenuItem className="hover:cursor-pointer" onClick={handleLogOut}>
                     <LogOut className="w-4 h-4 mr-3 text-muted-foreground" />
                     Se déconnecter
                 </DropdownMenuItem>
