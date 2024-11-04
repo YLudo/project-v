@@ -7,6 +7,7 @@ const TravelsLayout = ({ travels }: TravelsLayoutProps) => {
             {travels.map((travel, index) => (
                 <TravelCard
                     key={index}
+                    id={travel.id}
                     destination={travel.destination}
                     startDate={travel.startDate}
                     endDate={travel.endDate}

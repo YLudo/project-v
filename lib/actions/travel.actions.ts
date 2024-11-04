@@ -105,3 +105,40 @@ export const createTravel = async (travel: Omit<Travel, 'id' | 'userId'>): Promi
         };
     }
 }
+
+export const deleteTravel = async (travelId: string): Promise<ApiResponse<null>> => {
+    const configError = checkConfig();
+    if (configError) return configError;
+
+    if (!travelId) {
+        return {
+            error: "L'identifiant du voyage n'est pas spécifié.",
+            status: 400
+        }
+    }
+
+    try {
+        const { database } = await createAdminClient();
+        const user = await getLoggedInUser();
+
+        if (isErrorResponse(user)) {
+            return user;
+        }
+
+        await database.deleteDocument(
+            DATABASE_ID!,
+            TRAVEL_COLLECTION_ID!,
+            travelId
+        );
+
+        return {
+            data: null,
+            status: 200
+        };
+    } catch (error) {
+        return {
+            error: "Oups! Quelque chose s'est mal passé. Veuillez réessayer dans quelques instants.",
+            status: 500
+        };
+    }
+}

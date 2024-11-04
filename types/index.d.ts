@@ -104,6 +104,7 @@ declare type Travel = {
 
 // COMPONENTS
 declare type TravelCardProps = {
+    id: string;
     destination: string;
     startDate: string;
     endDate: string;
