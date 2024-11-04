@@ -1,5 +1,5 @@
 import { TravelCardProps } from "@/types";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight, CalendarDays, MapPin } from "lucide-react";
 import { calculateDuration, formatDate } from "@/lib/utils";
 
@@ -7,7 +7,7 @@ const TravelCard = ({ destination, startDate, endDate }: TravelCardProps) => {
     const duration = calculateDuration(startDate, endDate);
 
     return (
-        <Card className="w-full max-w-md">
+        <Card className="w-full h-fit">
             <CardHeader className="pb-4">
                 <CardTitle className="text-xl font-bold flex items-center">
                     <MapPin className="w-6 h-6 mr-2 text-primary" />
@@ -29,7 +29,7 @@ const TravelCard = ({ destination, startDate, endDate }: TravelCardProps) => {
                 </div>
             </CardContent>
         </Card>
-    )
+    );
 }
 
 export default TravelCard;

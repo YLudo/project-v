@@ -107,3 +107,7 @@ declare type TravelCardProps = {
     startDate: string;
     endDate: string;
 };
+
+declare type TravelsLayoutProps = {
+    travels: TravelCardProps[];
+}
