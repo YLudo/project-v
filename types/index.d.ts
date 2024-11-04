@@ -93,3 +93,10 @@ declare type User = {
     email: string;
     username: string;
 }
+
+declare type Travel = {
+    id: string;
+    destination: string;
+    startDate: string;
+    endDate: string;
+}
