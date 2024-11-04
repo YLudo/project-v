@@ -1,7 +1,7 @@
 import { ContentLayout } from "@/components/layout/content-layout";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { getLoggedInUser } from "@/lib/actions/user.actions";
-import { Link } from "lucide-react";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 const DashboardPage = async () => {

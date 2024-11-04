@@ -1,33 +1,20 @@
-import TravelsLayout from "@/components/app/travels/travels-layout";
-import { ContentLayout } from "@/components/layout/content-layout"
+import TravelCreateForm from "@/components/app/travels/travel-create-form";
+import { ContentLayout } from "@/components/layout/content-layout";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
 import { buttonVariants } from "@/components/ui/button";
-import { toast } from "@/hooks/use-toast";
-import { getTravels } from "@/lib/actions/travel.actions";
 import { getLoggedInUser } from "@/lib/actions/user.actions";
-import { isErrorResponse } from "@/lib/utils";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-const TravelsPage = async () => {
+const TravelCreatePage = async () => {
     const response = await getLoggedInUser();
     if ('error' in response) {
         redirect("/login");
     }
-    
-    const travels = await getTravels();
-    if (isErrorResponse(travels)) {
-        toast({
-            variant: "destructive",
-            title: "Une erreur est survenue !",
-            description: travels.error,
-        })
-        redirect("/");
-    }
 
     return (
         <ContentLayout title="Voyages" user={response.data}>
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
                 <Breadcrumb>
                     <BreadcrumbList>
                         <BreadcrumbItem>
@@ -37,15 +24,21 @@ const TravelsPage = async () => {
                         </BreadcrumbItem>
                         <BreadcrumbSeparator />
                         <BreadcrumbItem>
-                            <BreadcrumbPage>Liste des voyages</BreadcrumbPage>
+                            <BreadcrumbLink asChild>
+                                <Link href="/travels">Voyages</Link>
+                            </BreadcrumbLink>
+                        </BreadcrumbItem>
+                        <BreadcrumbSeparator />
+                        <BreadcrumbItem>
+                            <BreadcrumbPage>Créer un voyage</BreadcrumbPage>
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>
-                <Link href="/travels/create" className={buttonVariants({ variant: "default" })}>Créer un voyage</Link>
+                <Link href="/travels" className={buttonVariants({ variant: "default" })}>Retour</Link>
             </div>
-            <TravelsLayout travels={travels.data} />
+            <TravelCreateForm />
         </ContentLayout>
     );
 }
 
-export default TravelsPage;
+export default TravelCreatePage;
