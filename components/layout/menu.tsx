@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import CollapseMenuButton from "@/components/layout/collapse-menu-button";
 import { signOut } from "@/lib/actions/user.actions";
+import { toast } from "@/hooks/use-toast";
 
 const Menu = ({ isOpen}: MenuProps) => {
     const pathname = usePathname();
@@ -18,8 +19,17 @@ const Menu = ({ isOpen}: MenuProps) => {
     const router = useRouter();
 
     const handleLogOut = async () => {
-        await signOut();
-        router.push('/login');
+        const response = await signOut();
+
+        if ('error' in response) {
+            toast({
+                variant: "destructive",
+                title: "Déconnexion échouée !",
+                description: response.error
+            });
+        } else {
+            router.push("/login");
+        }
     }
 
     return (

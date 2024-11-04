@@ -12,6 +12,7 @@ import { signUp } from "@/lib/actions/user.actions";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { toast } from "@/hooks/use-toast";
 
 const RegisterForm = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -32,14 +33,23 @@ const RegisterForm = () => {
     const onSubmit = async (data: FormData) => {
         setIsLoading(true);
 
-        try {
-            await signUp(data);
+        const response = await signUp(data);
+
+        if ('error' in response) {
+            toast({
+                variant: "destructive",
+                title: "Inscription échouée !",
+                description: response.error
+            });
+        } else {
+            toast({
+                title: "Inscription réussie !",
+                description: "Votre compte a été créé avec succès."
+            });
             router.push("/");
-        } catch (error) {
-            console.error('Error when signin up:', error);
-        } finally {
-            setIsLoading(false);
         }
+
+        setIsLoading(false);
     };
 
     return (
@@ -52,7 +62,7 @@ const RegisterForm = () => {
                         <FormItem>
                             <FormLabel>Nom d'utilisateur</FormLabel>
                             <FormControl>
-                                <Input placeholder="Entrez votre nom d'utilisateur" {...field} />         
+                                <Input placeholder="Entrez votre nom d'utilisateur" disabled={isLoading} {...field} />         
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -65,7 +75,7 @@ const RegisterForm = () => {
                         <FormItem>
                             <FormLabel>Adresse e-mail</FormLabel>
                             <FormControl>
-                                <Input placeholder="Entrez votre adresse e-mail" {...field} />         
+                                <Input placeholder="Entrez votre adresse e-mail" disabled={isLoading} {...field} />         
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -78,7 +88,7 @@ const RegisterForm = () => {
                         <FormItem>
                             <FormLabel>Mot de passe</FormLabel>
                             <FormControl>
-                                <Input type="password" placeholder="Entrez votre mot de passe" {...field} />         
+                                <Input type="password" placeholder="Entrez votre mot de passe" disabled={isLoading} {...field} />         
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -92,7 +102,7 @@ const RegisterForm = () => {
                         </>
                     ) : "S'inscrire"}
                 </Button>
-                <p className="text-sm text-center">Vous avez déjà un compte ? <Link href="/login" className="text-primary">Se connecter</Link></p>
+                <p className="text-sm text-center">Vous avez déjà un compte ? <Link href="/login" className="text-primary hover:underline">Se connecter</Link></p>
             </form>
         </Form>
     );

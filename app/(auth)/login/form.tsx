@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/hooks/use-toast";
 import { signIn } from "@/lib/actions/user.actions";
 import { loginFormSchema } from "@/lib/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -31,14 +32,23 @@ const LoginForm = () => {
     const onSubmit = async (data: FormData) => {
         setIsLoading(true);
 
-        try {
-            const response = await signIn(data);
-            if (response) router.push("/");
-        } catch (error) {
-            console.error("Error when signin in:", error);
-        } finally {
-            setIsLoading(false);
+        const response = await signIn(data);
+
+        if ('error' in response) {
+            toast({
+                variant: "destructive",
+                title: "Connexion échouée !",
+                description: response.error,
+            });
+        } else {
+            toast({
+                title: "Connexion réussie !",
+                description: "Vous vous êtes connecté avec succès."
+            });
+            router.push("/");
         }
+
+        setIsLoading(false);
     };
 
     return (
@@ -51,7 +61,7 @@ const LoginForm = () => {
                         <FormItem>
                             <FormLabel>Adresse e-mail</FormLabel>
                             <FormControl>
-                                <Input placeholder="Entrez votre adresse e-mail" {...field} />         
+                                <Input placeholder="Entrez votre adresse e-mail" disabled={isLoading} {...field} />         
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -64,7 +74,7 @@ const LoginForm = () => {
                         <FormItem>
                             <FormLabel>Mot de passe</FormLabel>
                             <FormControl>
-                                <Input type="password" placeholder="Entrez votre adresse e-mail" {...field} />         
+                                <Input type="password" placeholder="Entrez votre mot de passe" disabled={isLoading} {...field} />         
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -78,7 +88,7 @@ const LoginForm = () => {
                         </>
                     ) : "Se connecter"}
                 </Button>
-                <p className="text-sm text-center">Vous n'avez pas de compte ? <Link href="/register" className="text-primary">S'inscrire</Link></p>
+                <p className="text-sm text-center">Vous n'avez pas de compte ? <Link href="/register" className="text-primary hover:underline">S'inscrire</Link></p>
             </form>
         </Form>
     );

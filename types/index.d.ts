@@ -69,6 +69,19 @@ declare type SignInParams = {
     password: string;
 }
 
+// ACTIONS
+declare type ErrorResponse = {
+    error: string;
+    status: number;
+}
+
+declare type SuccessResponse<T> = {
+    data: T;
+    status: number;
+}
+
+declare type ApiResponse<T> = SuccessResponse<T> | ErrorResponse;
+
 // APP
 declare type GetUserInfoProps = {
     userId: string;

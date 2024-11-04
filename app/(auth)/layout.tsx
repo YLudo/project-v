@@ -6,8 +6,8 @@ export default async function AuthLayout({
 }: {
     children: React.ReactNode
 }) {
-    const user = await getLoggedInUser();
-    if (user) {
+    const response = await getLoggedInUser();
+    if (!('error' in response)) {
         redirect("/");
     }
 

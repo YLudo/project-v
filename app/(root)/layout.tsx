@@ -7,8 +7,8 @@ export default async function ApplicationLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const user = await getLoggedInUser();
-    if (!user) {
+    const response = await getLoggedInUser();
+    if ('error' in response) {
         redirect("/login");
     }
 

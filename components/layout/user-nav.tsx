@@ -8,12 +8,24 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { UserNavProps } from "@/types";
 import { signOut } from "@/lib/actions/user.actions";
-import router from "next/router";
+import { toast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
 
 const UserNav = ({ user }: UserNavProps) => {
+    const router = useRouter();
+    
     const handleLogOut = async () => {
-        await signOut();
-        router.push('/login');
+        const response = await signOut();
+
+        if ('error' in response) {
+            toast({
+                variant: "destructive",
+                title: "Déconnexion échouée !",
+                description: response.error
+            });
+        } else {
+            router.push("/login");
+        }
     }
 
     return (
