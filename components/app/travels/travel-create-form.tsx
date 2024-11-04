@@ -61,6 +61,7 @@ const TravelCreateForm = () => {
                 description: "Votre voyage a été créé avec succès."
             });
             router.push("/travels");
+            router.refresh();
         }
 
         setIsLoading(false);

@@ -20,9 +20,15 @@ const TravelCard = ({ destination, startDate, endDate }: TravelCardProps) => {
                     <span className="text-sm font-medium text-gray-600">Dates de voyage</span>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                    <div className="text-lg font-semibold mb-1 sm:mb-0">{formatDate(startDate)}</div>
-                    <ArrowRight className="hidden sm:block w-5 h-5 text-gray-400 mx-2" />
-                    <div className="text-lg font-semibold mb-1 sm:mb-0">{formatDate(endDate)}</div>
+                    { startDate && endDate ? (
+                        <>
+                            <div className="text-lg font-semibold mb-1 sm:mb-0">{formatDate(startDate)}</div>
+                            <ArrowRight className="hidden sm:block w-5 h-5 text-gray-400 mx-2" />
+                            <div className="text-lg font-semibold mb-1 sm:mb-0">{formatDate(endDate)}</div>
+                        </>
+                    ): (
+                        "Non défini"
+                    )}
                 </div>
                 <div className="mt-4 text-sm text-gray-600">
                     Durée : {duration} jour{duration !== 1 ? "s" : ""} 
