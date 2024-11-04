@@ -1,3 +1,4 @@
+import { ApiResponse, ErrorResponse } from "@/types";
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -6,6 +7,10 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const parseStringify = (value: any) => JSON.parse(JSON.stringify(value));
+
+export const isErrorResponse = (response: ApiResponse<any>): response is ErrorResponse => {
+  return 'error' in response;
+};
 
 export const formatDate = (dateString: string) => {
   const date = new Date(dateString);

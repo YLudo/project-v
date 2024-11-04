@@ -4,16 +4,12 @@ import { ApiResponse, ErrorResponse, GetUserInfoProps, SignInParams, SignUpParam
 import { createAdminClient, createSessionClient } from "../appwrite";
 import { ID, Query } from "node-appwrite";
 import { cookies } from "next/headers";
-import { parseStringify } from "../utils";
+import { isErrorResponse, parseStringify } from "@/lib/utils";
 
 const {
     APPWRITE_DATABASE_ID: DATABASE_ID,
     APPWRITE_USER_COLLECTION_ID: USER_COLLECTION_ID,
 } = process.env;
-
-const isErrorResponse = (response: ApiResponse<any>): response is ErrorResponse => {
-    return 'error' in response;
-};
 
 const checkConfig = (): ErrorResponse | null => {
     if (!DATABASE_ID || !USER_COLLECTION_ID) {

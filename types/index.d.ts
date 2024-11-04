@@ -99,6 +99,7 @@ declare type Travel = {
     destination: string;
     startDate: string;
     endDate: string;
+    userId: string;
 }
 
 // COMPONENTS
