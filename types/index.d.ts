@@ -97,8 +97,8 @@ declare type User = {
 declare type Travel = {
     id: string;
     destination: string;
-    startDate: string;
-    endDate: string;
+    startDate?: string;
+    endDate?: string;
     userId: string;
 }
 

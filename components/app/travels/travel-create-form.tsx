@@ -6,6 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { toast } from "@/hooks/use-toast";
+import { createTravel } from "@/lib/actions/travel.actions";
 import { travelCreateSchema } from "@/lib/schemas";
 import { cn, formatDate } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -35,8 +37,33 @@ const TravelCreateForm = () => {
         },
     });
 
-    const onSubmit = (data: FormData) => {
-        console.log(data);
+    const onSubmit = async (data: FormData) => {
+        setIsLoading(true);
+
+        const { destination, dateRange } = data;
+        const travelData = {
+            destination,
+            startDate: dateRange.from ? dateRange.from.toISOString() : undefined,
+            endDate: dateRange.to ? dateRange.to.toISOString() : undefined,
+        };
+
+        const response = await createTravel(travelData);
+
+        if ('error' in response) {
+            toast({
+                variant: "destructive",
+                title: "Création du voyage échouée !",
+                description: response.error
+            });
+        } else {
+            toast({
+                title: "Création du voyage réussie !",
+                description: "Votre voyage a été créé avec succès."
+            });
+            router.push("/travels");
+        }
+
+        setIsLoading(false);
     }
 
     return (

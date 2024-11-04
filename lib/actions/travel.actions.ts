@@ -4,7 +4,7 @@ import { ApiResponse, ErrorResponse, Travel } from "@/types";
 import { createAdminClient } from "../appwrite";
 import { getLoggedInUser } from "./user.actions";
 import { isErrorResponse } from "../utils";
-import { Query } from "node-appwrite";
+import { ID, Query } from "node-appwrite";
 
 const {
     APPWRITE_DATABASE_ID: DATABASE_ID,
@@ -48,6 +48,55 @@ export const getTravels = async ():Promise<ApiResponse<Travel[]>> => {
                 endDate: doc.endDate
             })),
             status: 200
+        };
+    } catch (error) {
+        return {
+            error: "Oups! Quelque chose s'est mal passé. Veuillez réessayer dans quelques instants.",
+            status: 500
+        };
+    }
+}
+
+export const createTravel = async (travel: Omit<Travel, 'id' | 'userId'>): Promise<ApiResponse<Travel>> => {
+    const configError = checkConfig();
+    if (configError) return configError;
+
+    const { destination, startDate, endDate } = travel;
+
+    if (!destination) {
+        return {
+            error: "Vous devez spécifier la destination du voyage.",
+            status: 400
+        };
+    }
+
+    try {
+        const { database } = await createAdminClient();
+        const user = await getLoggedInUser();
+
+        if (isErrorResponse(user)) {
+            return user;
+        }
+
+        const newTravel = await database.createDocument(
+            DATABASE_ID!,
+            TRAVEL_COLLECTION_ID!,
+            ID.unique(),
+            {
+                userId: user.data.userId,
+                ...travel
+            }
+        );
+
+        return {
+            data: {
+                id: newTravel.$id,
+                userId: user.data.userId,
+                destination,
+                startDate,
+                endDate
+            },
+            status: 201
         };
     } catch (error) {
         return {
