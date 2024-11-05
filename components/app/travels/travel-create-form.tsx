@@ -82,7 +82,7 @@ const TravelCreateForm = () => {
                                 <FormItem>
                                     <FormLabel>Destination</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Entrez votre destination" disabled={isLoading} required {...field} />
+                                        <Input placeholder="Entrez votre destination" disabled={isLoading} {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>

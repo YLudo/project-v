@@ -39,18 +39,21 @@ export const loginFormSchema = () => z.object({
 
 export const travelCreateSchema = () => 
     z.object({
-      destination: z.string(),
+      destination: z.string().min(1, "Vous devez spécifier une destination."),
       dateRange: z
         .object({
           from: z.date().optional(),
           to: z.date().optional(),
         })
         .refine(
-          (data) =>
-            (!data.from && !data.to) || (data.from && data.to && data.to > data.from),
+          (data) => {
+            if ((data.from && !data.to) || (!data.from && data.to)) return false;
+            if (data.from && data.to) return data.to > data.from;
+            return true;
+          },
           {
-            message: "La date de fin doit être supérieure à la date de début.",
-            path: ["dateRange"],
+            message: "Vous devez sélectionner une date de début ET une date de fin",
+            path: ["dateRange"]
           }
-        ),
+        )
     });

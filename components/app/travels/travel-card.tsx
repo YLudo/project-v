@@ -33,7 +33,7 @@ const TravelCard = ({ id, destination, startDate, endDate }: TravelCardProps) =>
         } else {
             toast({
                 title: "Suppression du voyage réussie !",
-                description: "Votre voyage a été supprimé avec succès?"
+                description: "Votre voyage a été supprimé avec succès."
             });
             router.refresh();
         }
