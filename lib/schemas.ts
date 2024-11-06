@@ -46,14 +46,15 @@ export const travelCreateSchema = () =>
           to: z.date().optional(),
         })
         .refine(
-          (data) => {
-            if ((data.from && !data.to) || (!data.from && data.to)) return false;
-            if (data.from && data.to) return data.to > data.from;
-            return true;
-          },
-          {
-            message: "Vous devez sélectionner une date de début ET une date de fin",
-            path: ["dateRange"]
-          }
+            (data) => (data.from && data.to) || (!data.from && !data.to),
+            {
+                message: "Vous devez sélectionner une date de début ET une date de fin."
+            }
+        )
+        .refine(
+            (data) => (!data.from && !data.to) || (data.from && data.to && data.to > data.from),
+            {
+                message: "La date de fin doit être supérieure à la date de début."
+            }
         )
     });
