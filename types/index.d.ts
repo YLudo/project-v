@@ -113,3 +113,13 @@ declare type TravelCardProps = {
 declare type TravelsLayoutProps = {
     travels: TravelCardProps[];
 }
+
+declare type TravelEditPageProps = {
+    params: {
+        travelId: string;
+    };
+}
+
+declare type TravelEditFormProps = {
+    travel: Travel;
+}
