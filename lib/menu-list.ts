@@ -1,5 +1,5 @@
 import { Group } from "@/types";
-import { LayoutGrid } from "lucide-react";
+import { LayoutGrid, Plane } from "lucide-react";
 
 export default function getMenuList(pathname: string): Group[] {
     return [
@@ -13,6 +13,13 @@ export default function getMenuList(pathname: string): Group[] {
                     icon: LayoutGrid,
                     submenus: [],
                 },
+                {
+                    href: "/travels",
+                    label: "Voyages",
+                    active: pathname.includes("/travels"),
+                    icon: Plane,
+                    submenus: [],
+                }
             ],
         },
     ]

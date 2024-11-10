@@ -1,5 +1,7 @@
 import { ContentLayout } from "@/components/layout/content-layout";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { getLoggedInUser } from "@/lib/actions/user.actions";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 const DashboardPage = async () => {
@@ -10,7 +12,19 @@ const DashboardPage = async () => {
 
     return (
         <ContentLayout title="Tableau de bord" user={response.data}>
-            Test
+            <Breadcrumb>
+                <BreadcrumbList>
+                    <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                            <Link href="/">Accueil</Link>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                        <BreadcrumbPage>Tableau de bord</BreadcrumbPage>
+                    </BreadcrumbItem>
+                </BreadcrumbList>
+            </Breadcrumb>
         </ContentLayout>
     );
 }

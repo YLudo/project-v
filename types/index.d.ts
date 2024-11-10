@@ -1,6 +1,6 @@
 import { LucideIcon } from "lucide-react";
 
-// MENU
+// LAYOUT
 declare type Submenu = {
     href: string;
     label: string;
@@ -69,6 +69,10 @@ declare type SignInParams = {
     password: string;
 }
 
+declare type GetUserInfoProps = {
+    userId: string;
+}
+
 // ACTIONS
 declare type ErrorResponse = {
     error: string;
@@ -82,14 +86,40 @@ declare type SuccessResponse<T> = {
 
 declare type ApiResponse<T> = SuccessResponse<T> | ErrorResponse;
 
-// APP
-declare type GetUserInfoProps = {
-    userId: string;
-}
-
+// ENTITIES
 declare type User = {
     $id: string;
     userId: string;
     email: string;
     username: string;
+}
+
+declare type Travel = {
+    id: string;
+    destination: string;
+    startDate?: string;
+    endDate?: string;
+    userId: string;
+}
+
+// COMPONENTS
+declare type TravelCardProps = {
+    id: string;
+    destination: string;
+    startDate: string;
+    endDate: string;
+};
+
+declare type TravelsLayoutProps = {
+    travels: TravelCardProps[];
+}
+
+declare type TravelEditPageProps = {
+    params: {
+        travelId: string;
+    };
+}
+
+declare type TravelEditFormProps = {
+    travel: Travel;
 }

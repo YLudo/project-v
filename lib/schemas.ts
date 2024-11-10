@@ -36,3 +36,25 @@ export const loginFormSchema = () => z.object({
             message: "Votre mot de passe doit contenir au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial."
         }),
 });
+
+export const travelCreateSchema = () => 
+    z.object({
+      destination: z.string().min(1, "Vous devez spécifier une destination."),
+      dateRange: z
+        .object({
+          from: z.date().optional(),
+          to: z.date().optional(),
+        })
+        .refine(
+            (data) => (data.from && data.to) || (!data.from && !data.to),
+            {
+                message: "Vous devez sélectionner une date de début ET une date de fin."
+            }
+        )
+        .refine(
+            (data) => (!data.from && !data.to) || (data.from && data.to && data.to > data.from),
+            {
+                message: "La date de fin doit être supérieure à la date de début."
+            }
+        )
+    });
