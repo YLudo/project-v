@@ -1,4 +1,5 @@
 import { LucideIcon } from "lucide-react";
+import { ParsedUrlQuery } from "querystring";
 
 // LAYOUT
 declare type Submenu = {
@@ -102,6 +103,48 @@ declare type Travel = {
     userId: string;
 }
 
+declare type Bank = {
+    $id: string;
+    accountId: string;
+    bankId: string;
+    accessToken: string;
+    userId: string;
+    shareableId: string;
+};
+
+declare type Account = {
+    id: string;
+    availableBalance: number;
+    currentBalance: number;
+    officialName: string;
+    mask: string;
+    institutionId: string;
+    name: string;
+    type: string;
+    subtype: string;
+    appwriteItemId: string;
+    shareableId: string;
+};
+
+declare type Transaction = {
+    id: string;
+    $id: string;
+    name: string;
+    paymentChannel: string;
+    type: string;
+    accountId: string;
+    amount: number;
+    pending: boolean;
+    category: string;
+    date: string;
+    image: string;
+    type: string;
+    $createdAt: string;
+    channel: string;
+    senderBankId: string;
+    receiverBankId: string;
+};
+
 // COMPONENTS
 declare type TravelCardProps = {
     id: string;
@@ -122,4 +165,70 @@ declare type TravelEditPageProps = {
 
 declare type TravelEditFormProps = {
     travel: Travel;
+}
+
+declare type CreateBankAccountProps = {
+    bankId: string;
+    accountId: string;
+    accessToken: string;
+    shareableId: string;
+    userId: string;
+}
+
+declare type ExchangePublicTokenProps = {
+    publicToken: string;
+    user: User;
+}
+
+declare type PlaidLinkProps = {
+    user: User;
+}
+
+declare type GetBanksProps = {
+    userId: string;
+}
+  
+declare type GetBankProps = {
+    documentId: string;
+}
+
+declare type GetBankByAccountIdProps = {
+    accountId: string;
+}
+
+declare type GetAccountsProps = {
+    userId: string;
+}
+
+declare type GetAccountProps = {
+    appwriteItemId: string;
+}
+
+declare type GetInstitutionProps = {
+    institutionId: string;
+}
+
+declare type GetTransactionsProps = {
+    accessToken: string;
+}
+
+declare type TransactionsPageProps = {
+    searchParams: ParsedUrlQuery;
+}
+
+declare type TransactionHistoryProps = {
+    user: User,
+    params: {
+        page: number,
+        id?:string
+    }
+}
+
+declare type TransactionsTableProps = {
+    transactions: Transaction[];
+}
+
+declare type TransactionPaginationProps = {
+    page: number,
+    totalPages: number;
 }

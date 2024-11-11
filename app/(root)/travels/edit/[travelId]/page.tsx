@@ -16,7 +16,7 @@ const TravelEditPage = async ({ params }: TravelEditPageProps) => {
 
     const travelResponse = await getTravel(params.travelId);
     if ('error' in travelResponse) {
-        notFound();
+        redirect("/travels");
     }
 
     return (
