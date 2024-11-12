@@ -40,8 +40,6 @@ const TransactionHistory = async ({ user, params }: TransactionHistoryProps) => 
         indexOfFirstTransaction, indexOfLastTransaction
     )
 
-    console.log(account);
-
     return (
         <div className="space-y-6 mt-6">
             <Card className="bg-primary">

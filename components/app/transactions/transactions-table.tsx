@@ -26,6 +26,7 @@ const TransactionsTable = ({ transactions }: TransactionsTableProps) => {
                         <TableRow key={t.id} className="!over:bg-none !border-b-DEFAULT">
                             <TableCell className="max-w-[250px] pl-2 pr-10">
                                 <div className="flex items-center gap-3">
+                                    <img src={t.image} className="w-8 rounded-full" />
                                     <h1 className="text-sm truncate font-semibold">
                                         {removeSpecialCharacters(t.name)}
                                     </h1>
