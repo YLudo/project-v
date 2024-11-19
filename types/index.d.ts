@@ -145,10 +145,17 @@ declare type Transaction = {
     receiverBankId: string;
 };
 
-declare type FileItem = {
+declare type TravelFileItem = {
     id: string;
     name: string;
     size: string;
+}
+
+declare type TravelActivity = {
+    id: string;
+    date: string;
+    name: string;
+    location: string;
 }
 
 // COMPONENTS

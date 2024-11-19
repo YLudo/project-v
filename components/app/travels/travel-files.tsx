@@ -3,12 +3,12 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { FileItem } from "@/types";
+import { TravelFileItem } from "@/types";
 import { File, Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
 
 const TravelFiles = () => {
-    const [files, setFiles] = useState<FileItem[]>([
+    const [files, setFiles] = useState<TravelFileItem[]>([
         { id: "1", name: "document.pdf", size: "2.5 MB" },
         { id: "2", name: "image.jpg", size: "3.7 MB" },
         { id: "3", name: "spreadsheet.xlsx", size: "1.2 MB" },
