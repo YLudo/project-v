@@ -145,6 +145,12 @@ declare type Transaction = {
     receiverBankId: string;
 };
 
+declare type FileItem = {
+    id: string;
+    name: string;
+    size: string;
+}
+
 // COMPONENTS
 declare type TravelCardProps = {
     id: string;
