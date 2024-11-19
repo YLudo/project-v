@@ -232,3 +232,9 @@ declare type TransactionPaginationProps = {
     page: number,
     totalPages: number;
 }
+
+declare type TravelShowPageProps = {
+    params: {
+        travelId: string;
+    };
+}

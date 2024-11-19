@@ -2,7 +2,7 @@
 
 import { TravelCardProps } from "@/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, CalendarDays, Edit, MapPin, MoreVertical, Trash } from "lucide-react";
+import { ArrowRight, CalendarDays, Edit, Eye, MapPin, MoreVertical, Trash } from "lucide-react";
 import { calculateDuration, formatDate } from "@/lib/utils";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
@@ -20,10 +20,6 @@ const TravelCard = ({ id, destination, startDate, endDate }: TravelCardProps) =>
     const handleDeleteClick = () => {
         setShowModal(true);
     };
-
-    const handleEditClick = () => {
-        router.push(`/travels/edit/${id}`);
-    }
 
     const handleDelete = async () => {
         const response = await deleteTravel(id);
@@ -60,7 +56,11 @@ const TravelCard = ({ id, destination, startDate, endDate }: TravelCardProps) =>
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                            <DropdownMenuItem className="hover:cursor-pointer" onClick={handleEditClick}>
+                            <DropdownMenuItem className="hover:cursor-pointer" onClick={() => router.push(`/travels/show/${id}`)}>
+                                <Eye className="mr-2 h-4 w-4" />
+                                <span>Voir</span>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem className="hover:cursor-pointer" onClick={() => router.push(`/travels/edit/${id}`)}>
                                 <Edit className="mr-2 h-4 w-4" />
                                 <span>Modifier</span>
                             </DropdownMenuItem>
