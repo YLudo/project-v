@@ -154,7 +154,7 @@ declare type TravelCardProps = {
 };
 
 declare type TravelsLayoutProps = {
-    travels: TravelCardProps[];
+    travels: Travel[];
 }
 
 declare type TravelEditPageProps = {
