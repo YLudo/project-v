@@ -13,7 +13,7 @@ import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 
 const TravelCard = ({ id, destination, startDate, endDate }: TravelCardProps) => {
-    const duration = calculateDuration(startDate, endDate);
+    const duration = calculateDuration(startDate!, endDate!);
     const [showModal, setShowModal] = useState(false);
     const router = useRouter();
 

@@ -149,8 +149,8 @@ declare type Transaction = {
 declare type TravelCardProps = {
     id: string;
     destination: string;
-    startDate: string;
-    endDate: string;
+    startDate: string | undefined;
+    endDate: string | undefined;
 };
 
 declare type TravelsLayoutProps = {
