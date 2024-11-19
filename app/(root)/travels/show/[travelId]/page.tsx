@@ -1,3 +1,4 @@
+import TravelShowLayout from "@/components/app/travels/travel-show-layout";
 import { ContentLayout } from "@/components/layout/content-layout";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { buttonVariants } from "@/components/ui/button";
@@ -42,6 +43,13 @@ const TravelShowPage = async ({ params }: TravelShowPageProps) => {
                 </Breadcrumb>
                 <Link href="/travels" className={buttonVariants({ variant: "default" })}>Retour</Link>
             </div>
+            <TravelShowLayout 
+                id={travelResponse.data.id}
+                destination={travelResponse.data.destination} 
+                userId={travelResponse.data.userId} 
+                startDate={travelResponse.data.startDate} 
+                endDate={travelResponse.data.endDate} 
+            />
         </ContentLayout>
     );
 }
