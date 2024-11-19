@@ -1,6 +1,6 @@
 "use server";
 
-import { ApiResponse, CreateBankAccountProps, ErrorResponse, ExchangePublicTokenProps, GetBankProps, GetBanksProps, GetUserInfoProps, SignInParams, SignUpParams, SuccessResponse, User } from "@/types";
+import { ApiResponse, CreateBankAccountProps, ErrorResponse, ExchangePublicTokenProps, GetBankProps, GetBanksProps, GetUserInfoProps, SignInParams, SignUpParams, User } from "@/types";
 import { createAdminClient, createSessionClient } from "../appwrite";
 import { ID, Query } from "node-appwrite";
 import { cookies } from "next/headers";

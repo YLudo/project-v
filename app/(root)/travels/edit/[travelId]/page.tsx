@@ -6,7 +6,7 @@ import { getTravel } from "@/lib/actions/travel.actions";
 import { getLoggedInUser } from "@/lib/actions/user.actions";
 import { TravelEditPageProps } from "@/types";
 import Link from "next/link";
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 
 const TravelEditPage = async ({ params }: TravelEditPageProps) => {
     const userResponse = await getLoggedInUser();
