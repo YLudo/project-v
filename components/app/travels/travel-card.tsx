@@ -42,7 +42,7 @@ const TravelCard = ({ id, destination, startDate, endDate }: TravelCardProps) =>
 
     return (
         <>
-            <Card className="w-full h-fit">
+            <Card className="w-full h-fit cursor-pointer" onClick={() => router.push(`/travels/show/${id}`)}>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
                     <CardTitle className="text-xl font-bold flex items-center">
                         <MapPin className="w-6 h-6 mr-2 text-primary" />
