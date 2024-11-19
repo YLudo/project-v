@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { formatAmount, formatDate, getTransactionStatus, removeSpecialCharacters } from "@/lib/utils"
 import { Transaction, TransactionsTableProps } from "@/types"
+import Image from "next/image"
 
 const TransactionsTable = ({ transactions }: TransactionsTableProps) => {
     return (
@@ -25,7 +26,16 @@ const TransactionsTable = ({ transactions }: TransactionsTableProps) => {
                         <TableRow key={t.id} className="!over:bg-none !border-b-DEFAULT">
                             <TableCell className="max-w-[250px] pl-2 pr-10">
                                 <div className="flex items-center gap-3">
-                                    <img src={t.image} className="w-8 rounded-full" />
+                                    {t.image ? (
+                                        <Image src={t.image} 
+                                            className="rounded-full" 
+                                            width={32} 
+                                            height={32} 
+                                            alt={removeSpecialCharacters(t.name)} 
+                                        />
+                                    ) : (
+                                        <div className="w-8" />
+                                    )}
                                     <h1 className="text-sm truncate font-semibold">
                                         {removeSpecialCharacters(t.name)}
                                     </h1>
