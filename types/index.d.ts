@@ -145,6 +145,19 @@ declare type Transaction = {
     receiverBankId: string;
 };
 
+declare type TravelFileItem = {
+    id: string;
+    name: string;
+    size: string;
+}
+
+declare type TravelActivity = {
+    id: string;
+    date: string;
+    name: string;
+    location: string;
+}
+
 // COMPONENTS
 declare type TravelCardProps = {
     id: string;
@@ -231,4 +244,10 @@ declare type TransactionsTableProps = {
 declare type TransactionPaginationProps = {
     page: number,
     totalPages: number;
+}
+
+declare type TravelShowPageProps = {
+    params: {
+        travelId: string;
+    };
 }

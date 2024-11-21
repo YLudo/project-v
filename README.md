@@ -1,36 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# 🌍 Projet V - Votre compagnon de voyage intelligent
 
-First, run the development server:
+> Une application moderne pour planifier, organiser et partager vos voyages en groupe. Gérez vos dépenses, créez des itinéraires et gardez tous vos documents de voyage en un seul endroit.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 📚 Structure du Projet
+```
+projet-v/ 
+├── app/                # Routes et pages Next.js 
+├── components/ 
+│   ├── app/            # Composants spécifiques à l'application 
+│   ├── layout/         # Composants de mise en page 
+│   └── ui/             # Composants UI réutilisables 
+├── hooks/              # Custom React hooks 
+├── lib/                # Utilitaires et configurations 
+├── types/              # Types TypeScript 
+└── public/             # Assets statiques
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Fonctionnalités Principales
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 🤝 Planification de Voyage en Groupe
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+-   Création collaborative d'itinéraires
+-   Système de rôles (organisateur, participants, invités)
+-   Partage en temps réel des modifications
 
-## Learn More
+### 💰 Gestion du Budget via Plaid
 
-To learn more about Next.js, take a look at the following resources:
+-   Synchronisation bancaire en temps réel
+-   Catégorisation automatique des dépenses
+-   Suivi et alertes budgétaires
+-   Répartition des coûts entre participants
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 🗺️ Cartographie Interactive avec MapBox
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+-   Visualisation des itinéraires
+-   Points d'intérêt et informations détaillées
+-   Navigation en temps réel
+-   Partage de lieux favoris
 
-## Deploy on Vercel
+### 📄 Gestion Documentaire
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+-   Stockage sécurisé des documents de voyage
+-   Accès hors-ligne
+-   Organisation intelligente
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🛠️ Technologies Utilisées
+
+-   **Frontend**: Next.js 14, TypeScript, Tailwind CSS, shadcn/ui
+-   **Backend**: Appwrite (Authentication, Database, Storage)
+-   **API Externes**:
+    -   Plaid pour l'intégration bancaire
+    -   MapBox pour la cartographie
+-   **Déploiement**: Vercel
+
+## 🚀 Installation
+
+1.  **Cloner le repository**
+
+`git clone https://github.com/votre-username/projet-v.git cd projet-v`
+
+2.  **Installer les dépendances**
+
+`npm  install # ou pnpm  install`
+
+3.  **Configuration des variables d'environnement**
+
+`cp .env.example .env.local`
+
+4.  **Remplir les variables d'environnement requises**
+
+```
+# NEXT 
+NEXT_PUBLIC_SITE_URL=http://localhost:3000   
+# APPWRITE 
+NEXT_PUBLIC_APPWRITE_ENDPOINT= 
+NEXT_PUBLIC_APPWRITE_PROJECT= 
+APPWRITE_DATABASE_ID= 
+APPWRITE_USER_COLLECTION_ID= 
+APPWRITE_TRAVEL_COLLECTION_ID= 
+APPWRITE_BANK_COLLECTION_ID= 
+NEXT_APPWRITE_KEY=   
+# PLAID 
+PLAID_CLIENT_ID= 
+PLAID_SECRET= 
+PLAID_ENV=sandbox 
+PLAID_PRODUCTS=auth,transactions,identity 
+PLAID_COUNTRY_CODES=FR
+```
+
+5.  **Lancer le serveur de développement**
+
+```
+npm run dev # ou 
+pnpm dev
+```
+
+Ouvrez [http://localhost:3000](http://localhost:3000) dans votre navigateur pour voir le résultat.
+
+## 📝 Configuration Requise
+
+-   Node.js 18.0 ou supérieur
+-   Compte Appwrite
+-   Compte Plaid (pour l'intégration bancaire)
+-   Compte MapBox (pour la cartographie)
+
+## 🔧 Scripts Disponibles
+
+```
+npm run dev # Lance le serveur de développement 
+npm run build # Build l'application pour la production 
+npm run start # Lance l'application en mode production 
+npm run lint # Vérifie le code avec ESLint
+```
+## 📞 Support
+
+Pour toute question ou assistance :
+
+-   📧 Email: [ludovic.roux31@ynov.com](mailto:ludovic.roux31@ynov.com)
+----------
+
+Développé avec ❤️ par Loud
