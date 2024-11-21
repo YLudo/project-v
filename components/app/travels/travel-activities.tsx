@@ -9,12 +9,12 @@ import { useState } from "react";
 
 const TravelActivities = () => {
     const activities: TravelActivity[] = [
-        { id: "1", date: "2023-07-01", name: "Visite de la Tour Eiffel", location: "Paris, France" },
-        { id: "2", date: "2023-07-01", name: "Croisière sur la Seine", location: "Paris, France" },
-        { id: "3", date: "2023-07-02", name: "Musée du Louvre", location: "Paris, France" },
-        { id: "4", date: "2023-07-03", name: "Château de Versailles", location: "Versailles, France" },
-        { id: "5", date: "2023-07-04", name: "Mont Saint-Michel", location: "Normandie, France" },
-        { id: "6", date: "2023-07-05", name: "Plages du Débarquement", location: "Normandie, France" },
+        { id: "1", date: "2024-11-24", name: "British museum", location: "Londres, Royaume-Unis" },
+        { id: "2", date: "2024-11-25", name: "Visite Westminster", location: "Londres, Royaume-Unis" },
+        { id: "3", date: "2024-11-26", name: "Studio Harry Potter", location: "Londres, Royaume-Unis" },
+        { id: "4", date: "2024-11-27", name: "London Designer Outlet", location: "Londres, Royaume-Unis" },
+        { id: "5", date: "2024-11-28", name: "HMS Belfast", location: "Londres, Royaume-Unis" },
+        { id: "6", date: "2024-11-28", name: "Winter Wonderland", location: "Londres, Royaume-Unis" },
     ];
 
     const sortedActivities = activities.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
@@ -50,7 +50,7 @@ const TravelActivities = () => {
                         <ChevronLeft className="h-4 w-4" />
                     </Button>
                     <h3 className="text-lg font-semibold flex items-center">
-                        <Calendar className="w-5 h-5 mr-2" />
+                        <Calendar className="w-5 h-5 mr-2 text-primary" />
                         {formattedDate}
                     </h3>
                     <Button
@@ -69,8 +69,8 @@ const TravelActivities = () => {
                         <li key={activity.id} className="bg-muted rounded-lg p-3">
                             <h4 className="font-medium mb-1">{activity.name}</h4>
                             <p className="text-sm text-muted-foreground flex items-center">
-                            <MapPin className="w-4 h-4 mr-1" />
-                            {activity.location}
+                                <MapPin className="w-4 h-4 mr-1" />
+                                {activity.location}
                             </p>
                         </li>
                         ))}
