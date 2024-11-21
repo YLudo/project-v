@@ -1,7 +1,8 @@
 import { Travel } from "@/types";
-import TravelCard from "./travel-card";
-import TravelFiles from "./travel-files";
-import TravelActivities from "./travel-activities";
+import TravelCard from "@/components/app/travels/travel-card";
+import TravelFiles from "@/components/app/travels/travel-files";
+import TravelActivities from "@/components/app/travels/travel-activities";
+import TravelMap from "@/components/app/travels/travel-map";
 
 const TravelShowLayout = (travel: Travel) => {
     return (
@@ -16,6 +17,7 @@ const TravelShowLayout = (travel: Travel) => {
                 <TravelFiles />
             </div>
             <TravelActivities />
+            <TravelMap />
         </div>
     )
 }
