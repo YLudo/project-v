@@ -1,10 +1,10 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { TravelActivity } from "@/types"
-import { Calendar, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
+import { Calendar, ChevronLeft, ChevronRight, MapPin, Plus } from "lucide-react";
 import { useState } from "react";
 
 const TravelActivities = () => {
@@ -34,7 +34,7 @@ const TravelActivities = () => {
     }
 
     return (
-        <Card className="w-full">
+        <Card className="w-full h-fit">
             <CardHeader>
                 <CardTitle className="text-xl font-bold">Activités du Voyage</CardTitle>
             </CardHeader>
@@ -77,6 +77,12 @@ const TravelActivities = () => {
                     </ul>
                 </ScrollArea>
             </CardContent>
+            <CardFooter>
+                <Button className="w-full">
+                    <Plus className="w-4 h-4 mr-2" />
+                    Ajouter une activité
+                </Button>
+            </CardFooter>
         </Card>
     )
 }

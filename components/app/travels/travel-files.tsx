@@ -59,7 +59,7 @@ const TravelFiles = () => {
                 </div>
             </CardContent>
             <CardFooter>
-                <Button variant="outline" className="w-full">
+                <Button className="w-full">
                     <Plus className="w-4 h-4 mr-2" />
                     Ajouter des fichiers
                 </Button>
